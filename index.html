@@ -187,6 +187,26 @@
       letter-spacing: 0.03em;
     }
 
+    .company-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .company-link:hover {
+      color: var(--fg);
+    }
+
+    .company-link img {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      display: block;
+    }
+
     .entry-sub .location {
       margin-left: 12px;
       padding-left: 12px;
@@ -439,23 +459,26 @@
         <span class="entry-date">September 2025 &ndash; Present</span>
       </div>
       <div class="entry-sub">
-        squidservers.com
-        <span class="location">Remote</span>
+        <a class="company-link" href="https://squidservers.com" target="_blank" rel="noopener">
+          <img src="https://squidservers.com/favicon.ico" alt="SquidServers icon" />
+          squidservers.com
+        </a>
       </div>
       <div class="stats-row">
         <div class="stat">
-          <span class="stat-value">95k+</span>
+          <span class="stat-value">100k+</span>
           <span class="stat-label">Users</span>
         </div>
         <div class="stat">
-          <span class="stat-value">800k+</span>
+          <span class="stat-value">950k+</span>
           <span class="stat-label">Servers Launched</span>
         </div>
+        
       </div>
       <ul>
         <li>Built core Electron application features including server multi-hosting and non-vanilla world imports</li>
         <li>Deployed secure website on Oracle Cloud VM with Cloudflare protections and a full blog publishing platform using Next.js</li>
-        <li>Engineered programmatic SEO strategy driving 95k+ organic users</li>
+        <li>Engineered programmatic SEO strategy driving 100k+ organic users</li>
         <li>Helped launch 800k+ Minecraft servers for users across the platform</li>
       </ul>
       <div class="tags">
