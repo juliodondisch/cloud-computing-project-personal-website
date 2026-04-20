@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julio Dondisch</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f0f0f0;
+      --muted: #888;
+      --accent: #c8a96e;
+      --dim: #1a1a1a;
+      --border: #222;
+      --section-gap: 120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Georgia', serif;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 60px;
+    }
+
+    nav .logo {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
+
+    nav ul li a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav ul li a:hover { color: var(--fg); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: var(--section-gap) 40px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 100px;
+    }
+
+    #hero .eyebrow {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    #hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: normal;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    #hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-links a {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-links a:hover { color: var(--fg); border-color: var(--fg); }
+
+    /* ── SECTION HEADING ── */
+    .section-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── EXPERIENCE / RESEARCH CARDS ── */
+    .entry {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+
+    .entry:last-child { border-bottom: 1px solid var(--border); }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .entry-title {
+      font-size: 1.05rem;
+      font-weight: normal;
+      color: var(--fg);
+    }
+
+    .entry-date {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      margin-top: 3px;
+    }
+
+    .entry-sub {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .entry-sub .location {
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+
+    .entry ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .entry ul li {
+      position: relative;
+      padding-left: 18px;
+      color: #bbb;
+      font-size: 0.93rem;
+      margin-bottom: 10px;
+      line-height: 1.65;
+    }
+
+    .entry ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    /* ── STATS ROW (SquidServers) ── */
+    .stats-row {
+      display: flex;
+      gap: 40px;
+      margin: 20px 0 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      color: var(--fg);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0;
+    }
+
+    .skill-group {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 28px;
+      padding-right: 24px;
+    }
+
+    .skill-group:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-group-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .skill-group p {
+      font-size: 0.88rem;
+      color: #bbb;
+      line-height: 1.7;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-block {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+
+    .edu-block:last-child { border-bottom: 1px solid var(--border); }
+
+    .edu-institution {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .edu-degree {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .edu-meta {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .edu-meta span { display: flex; gap: 6px; align-items: center; }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding-bottom: 140px;
+    }
+
+    #contact h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: normal;
+      margin-bottom: 16px;
+    }
+
+    #contact p {
+      color: var(--muted);
+      margin-bottom: 36px;
+      font-size: 0.95rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-item {
+      padding: 24px 0;
+      border-right: 1px solid var(--border);
+      padding-right: 20px;
+    }
+
+    .contact-item:last-child { border-right: none; }
+
+    .contact-item-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .contact-item a, .contact-item span {
+      font-size: 0.88rem;
+      color: var(--fg);
+      text-decoration: none;
+      transition: color 0.2s;
+      word-break: break-all;
+    }
+
+    .contact-item a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 40px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--border);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 18px 24px; }
+      nav ul { gap: 20px; }
+      section { padding: var(--section-gap) 24px; }
+      #hero h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="logo">Julio Dondisch</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="eyebrow">Computer Science &middot; Texas A&amp;M University</p>
+    <h1>Julio<br>Dondisch</h1>
+    <p>Builder at the intersection of software engineering and AI. Co-founder, researcher, and full-stack developer with a focus on real-world systems.</p>
+    <div class="hero-links">
+      <a href="#experience">Work Experience</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Work Experience</div>
+
+    <!-- SquidServers -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Co-founder &amp; Developer &mdash; SquidServers</span>
+        <span class="entry-date">September 2025 &ndash; Present</span>
+      </div>
+      <div class="entry-sub">
+        squidservers.com
+        <span class="location">Remote</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-value">95k+</span>
+          <span class="stat-label">Users</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">800k+</span>
+          <span class="stat-label">Servers Launched</span>
+        </div>
+      </div>
+      <ul>
+        <li>Built core Electron application features including server multi-hosting and non-vanilla world imports</li>
+        <li>Deployed secure website on Oracle Cloud VM with Cloudflare protections and a full blog publishing platform using Next.js</li>
+        <li>Engineered programmatic SEO strategy driving 95k+ organic users</li>
+        <li>Helped launch 800k+ Minecraft servers for users across the platform</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Electron</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">React</span>
+        <span class="tag">Node</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">Cloudflare</span>
+        <span class="tag">Oracle Cloud</span>
+        <span class="tag">SEO</span>
+      </div>
+    </div>
+
+    <!-- Incode -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineering Intern &mdash; Incode</span>
+        <span class="entry-date">June 2025 &ndash; August 2025</span>
+      </div>
+      <div class="entry-sub">
+        San Francisco, California
+      </div>
+      <ul>
+        <li>Developed Incode's AI Policy Alignment agent &mdash; performs autonomous actions including searching for and purchasing items, connecting to bank, doing identity verification, and allowing users to set natural language policies</li>
+        <li>Leveraged Java Springboot and Python for engine backend, PostgreSQL and React for agent monitoring and admin panel</li>
+        <li>Presented v1 and v2 of the Alignment Engine, along with research findings to the Incode team</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Java</span>
+        <span class="tag">Springboot</span>
+        <span class="tag">React</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+
+    <!-- Vinkos -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">AI Software Engineering Intern &mdash; Vinkos</span>
+        <span class="entry-date">June 2024 &ndash; August 2024</span>
+      </div>
+      <div class="entry-sub">
+        Mexico City, Mexico
+      </div>
+      <ul>
+        <li>Created a custom technical support LLM using Retrieval Augmented Generation (RAG) for internal use, leveraging previous company support tickets to optimize LLM responses and improve the team's debugging process</li>
+        <li>Researched RAG applications, established standards to decide on best LLM, vector database, and RAG architecture for each project &mdash; documented process and made detailed comparison matrices</li>
+        <li>Presented research findings and finalized RAG application to senior company managers and CEO</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Milvus</span>
+        <span class="tag">Pinecone</span>
+        <span class="tag">Docker</span>
+        <span class="tag">RAG</span>
+      </div>
+    </div>
+
+      <!-- Equipade -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Founder &amp; CTO &mdash; Equipade</span>
+        <span class="entry-date">March 2025 &ndash; November 2025</span>
+      </div>
+      <div class="entry-sub">
+        College Station, Texas
+      </div>
+      <ul>
+        <li>Architected and deployed multi-modal customer service voice agents for clients in medical, manufacturing, and educational industries &mdash; involved in entire process from sales and marketing to product design and development</li>
+        <li>Enabled customer support over off hours, cutting costs over 50% compared to live agents and removing the need for in-depth training</li>
+        <li>Developed back-end model achieving 96.5% accuracy on manufacturing-specific benchmarks, reducing error rate from alternatives like ChatGPT by 8x</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Java</span>
+        <span class="tag">Springboot</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Research</span>
+        <span class="tag">Benchmarking</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-label">Research</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Linear Algebra Computation Research &mdash; with Dr. Tim Davis</span>
+        <span class="entry-date">March 2024 &ndash; December 2024</span>
+      </div>
+      <div class="entry-sub">
+        Texas A&amp;M University
+        <span class="location">College Station, Texas</span>
+      </div>
+      <ul>
+        <li>Developed an algorithm using linear algebra for satisfiability problems, implementing backjumping and parallel processing</li>
+        <li>Leveraged SuiteSparse: GraphBLAS and LAGraph using C and Python for efficient sparse matrix computations</li>
+        <li>Built a framework for solving NP-complete problems through matrix operations</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">C</span>
+        <span class="tag">LAGraph</span>
+        <span class="tag">GraphBLAS</span>
+        <span class="tag">Linear Algebra</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Projects</div>
+
+    <!-- AI Stock Prediction -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">AI Stock Prediction Algorithm</span>
+        <span class="entry-date">May 2024 &ndash; January 2025</span>
+      </div>
+      <div class="entry-sub">
+        College Station, Texas
+      </div>
+      <ul>
+        <li>Developed an AI stock prediction model achieving 16.3% year-over-year performance on backtesting</li>
+        <li>Utilized a customized model with transformer and LSTM architectures to combine text-based data and numerical data</li>
+        <li>Built a daily web scraper using Selenium and BeautifulSoup to pull data from sites including Yahoo Finance and Benzinga News, hosted on AWS</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">AWS</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">BeautifulSoup</span>
+        <span class="tag">Selenium</span>
+        <span class="tag">S3</span>
+      </div>
+    </div>
+
+    <!-- FLINT Leadership -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Electronics Team Lead &mdash; Freshmen Leaders in New Technology (FLINT)</span>
+        <span class="entry-date">August 2023 &ndash; June 2024</span>
+      </div>
+      <div class="entry-sub">
+        College Station, Texas
+      </div>
+      <ul>
+        <li>Led a team of 20 to prototype and pitch an affordable E-bike conversion product to a board of faculty members</li>
+        <li>Introduced and applied Agile practices for product development, fostering cross-functional communication skills</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Education</div>
+
+    <div class="edu-block">
+      <div class="edu-institution">Texas A&amp;M University</div>
+      <div class="edu-degree">Bachelor of Science in Computer Science</div>
+      <div class="edu-degree">Minor in Mathematics and Psychology</div>
+      <div class="edu-meta">
+        <span>College Station, Texas</span>
+        <span>Expected December 2026</span>
+        <span>GPA 3.91</span>
+      </div>
+    </div>
+
+    <div style="padding: 28px 0; border-bottom: 1px solid var(--border);">
+      <div class="section-label" style="margin-bottom: 20px;">Relevant Coursework</div>
+      <div class="tags">
+        <span class="tag">Analysis of Algorithms</span>
+        <span class="tag">Software Engineering</span>
+        <span class="tag">Computer Systems</span>
+        <span class="tag">Security Engineering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Skills</div>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <p>Java, C++, Python, C, SQL, HTML/CSS, JavaScript, TypeScript, R, C#</p>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Frameworks &amp; Tools</div>
+        <p>Springboot, TensorFlow, PyTorch, NumPy, GraphBLAS, OpenCV, Docker, Pandas, Git, Linux, Postgres, MySQL</p>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Technical Areas</div>
+        <p>Machine Learning, Full-Stack Development, Data Analysis, NLP, Agile, Asynchronous Programming, Back-end, Front-end, Software Development, Research</p>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Spoken Languages</div>
+        <p>English &mdash; Native<br>Spanish &mdash; Native</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2>Let's connect.</h2>
+    <p>Currently based in College Station, Texas.</p>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-item-label">Email</div>
+        <a href="mailto:dondischj@tamu.edu">dondischj@tamu.edu</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Phone</div>
+        <a href="tel:+19793448214">+1 (979) 344-8214</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">LinkedIn</div>
+        <a href="https://linkedin.com/in/juliodondisch" target="_blank" rel="noopener">linkedin.com/in/juliodondisch</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">GitHub</div>
+        <a href="https://github.com/juliodondisch" target="_blank" rel="noopener">github.com/juliodondisch</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Julio Dondisch
+  </footer>
+
+</body>
+</html>
